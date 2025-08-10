@@ -5,6 +5,7 @@ import {
   TouchableWithoutFeedback,
   useColorScheme,
   View,
+  ActivityIndicator,
 } from "react-native";
 import React, { ReactElement, useState } from "react";
 import { Colors } from "../../constant/Colors";
@@ -17,16 +18,34 @@ import {
 import { Size } from "../../constant/Size";
 import CustomTextInput from "../../component/CutomTextInput";
 import CustomButton from "../../component/CustomButton";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { signUp } from "../../store/feature/auth/authThunks";
 
-interface PropTypes {}
+interface PropTypes {
+  navigation: any;
+}
 
 export default function Signup({ navigation }: PropTypes): ReactElement {
   const colorSchema = useColorScheme();
+  const dispatch = useAppDispatch();
+  const { error } = useAppSelector((s) => s.auth);
 
-  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const canSubmit = Boolean(email.trim() && password.trim());
+
+  async function onSignupPress() {
+    if (!canSubmit || submitting) return;
+    try {
+      setSubmitting(true);
+      await dispatch(signUp({ email, password }) as any).unwrap();
+    } catch (e) {
+      console.warn(e);
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -41,7 +60,7 @@ export default function Signup({ navigation }: PropTypes): ReactElement {
           },
         ]}
       >
-        {/* ??? TOP CONTAINE ??? */}
+        {/* ??? TOP CONTAINER ??? */}
         <View style={styles.topContainer}>
           <ImageContainer
             src={require("../../../assets/image/login_img.jpg")}
@@ -54,45 +73,47 @@ export default function Signup({ navigation }: PropTypes): ReactElement {
 
           <View style={styles.inputFieldContainer}>
             <CustomTextInput
-              value={fullName}
-              onChangeText={setFullName}
-              placeholder="full name"
-            />
-
-            <CustomTextInput
               value={email}
               onChangeText={setEmail}
               placeholder="email"
-            />
-
-            <CustomTextInput
-              value={username}
-              onChangeText={setUsername}
-              placeholder="username"
+              autoCapitalize="none"
+              keyboardType="email-address"
             />
 
             <CustomTextInput
               value={password}
               onChangeText={setPassword}
               placeholder="password"
+              secureTextEntry
+              textContentType="password"
             />
           </View>
 
           <View style={styles.loginBtnContainer}>
             <CustomButton
+              onPress={onSignupPress}
+              disabled={!canSubmit || submitting}
               style={{
                 backgroundColor: Colors.LIGHT.accent,
               }}
             >
-              Sign-up
+              {submitting ? "Creating account…" : "Sign-up"}
             </CustomButton>
           </View>
+
+          {submitting ? <ActivityIndicator style={{ marginTop: 8 }} /> : null}
+
+          {error ? (
+            <Text style={{ color: "red", textAlign: "center", marginTop: 8 }}>
+              {String(error)}
+            </Text>
+          ) : null}
 
           <View style={styles.bottomInfoText}>
             <Text
               style={{ textAlign: "center", fontSize: 16, fontWeight: "300" }}
             >
-              Already have and acoount?
+              Already have an account?
               <Text
                 style={{
                   textDecorationLine: "underline",

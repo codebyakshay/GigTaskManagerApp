@@ -9,11 +9,27 @@ import {
 import Octicons from "@expo/vector-icons/Octicons";
 import DashboardTaskTile from "../../component/DashboardTaskTile";
 import { styles } from "./styles";
+import CustomButton from "../../component/CustomButton";
+import { useAppDispatch } from "../../store/store";
+import { logOut } from "../../store/feature/auth/authThunks";
 
 interface PropTypes {}
 
 export default function Dashboard({}: PropTypes): ReactElement {
   const schemeColor = useColorScheme();
+  const dispatch = useAppDispatch();
+  const [submitting, setSubmitting] = React.useState(false);
+
+  async function onLogoutPress() {
+    if (submitting) return;
+    try {
+      setSubmitting(true);
+      await dispatch(logOut()).unwrap();
+      // RootNavigator will flip to <Local /> automatically via the auth listener
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <View
@@ -50,6 +66,12 @@ export default function Dashboard({}: PropTypes): ReactElement {
 
         <View style={styles.tileContainer}>
           <DashboardTaskTile count={10} label="Incomplete" />
+        </View>
+
+        <View>
+          <CustomButton onPress={onLogoutPress} disabled={submitting}>
+            {submitting ? "Logging out…" : "Log-out"}
+          </CustomButton>
         </View>
       </View>
     </View>

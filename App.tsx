@@ -5,13 +5,17 @@ import Login from "./src/screen/LoginScreen/Login";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import RootNavigator from "./src/navigation/RootNavigator";
+import { Provider as ReduxProvider } from "react-redux";
+import { store } from "./src/store/store";
 
 export default function App() {
   return (
     <PaperProvider>
       <SafeAreaProvider>
         <NavigationContainer>
-          <RootNavigator />
+          <ReduxProvider store={store}>
+            <RootNavigator />
+          </ReduxProvider>
         </NavigationContainer>
       </SafeAreaProvider>
     </PaperProvider>

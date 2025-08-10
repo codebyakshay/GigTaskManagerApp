@@ -33,6 +33,7 @@ export default function CustomTextInput({
       onChangeText={onChangeText}
       secureTextEntry={secureTextEntry}
       style={[styles.input, style]}
+      autoCapitalize="none"
     />
   );
 }

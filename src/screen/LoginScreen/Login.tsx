@@ -5,26 +5,45 @@ import {
   TouchableWithoutFeedback,
   useColorScheme,
   View,
+  ActivityIndicator,
 } from "react-native";
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useState, useEffect, use } from "react";
 import { Colors } from "../../constant/Colors";
 import ImageContainer from "../../component/ImageContainer";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 
 import { Size } from "../../constant/Size";
 import CustomTextInput from "../../component/CutomTextInput";
 import CustomButton from "../../component/CustomButton";
+import { styles } from "./styles";
+import { signIn } from "../../store/feature/auth/authThunks";
+import { useAppDispatch, useAppSelector } from "../../store/store";
 
-interface PropTypes {}
+interface PropTypes {
+  navigation: any;
+}
 
 export default function Login({ navigation }: PropTypes): ReactElement {
   const colorSchema = useColorScheme();
+  const dispatch = useAppDispatch();
+  const { error, user, ready } = useAppSelector((s) => s.auth);
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("aksinha8989@gmail.com");
+  const [password, setPassword] = useState("Hellohowru123@@@");
+  const [submitting, setSubmitting] = useState(false);
+
+  const canSubmit = Boolean(email.trim() && password.trim());
+
+  async function onLoginPress() {
+    if (!canSubmit || submitting) return;
+    try {
+      setSubmitting(true);
+      await dispatch(signIn({ email, password }) as any).unwrap();
+    } catch (e) {
+      console.warn(e);
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -39,7 +58,7 @@ export default function Login({ navigation }: PropTypes): ReactElement {
           },
         ]}
       >
-        {/* ??? TOP CONTAINE ??? */}
+        {/* ??? TOP CONTAINER ??? */}
         <View style={styles.topContainer}>
           <ImageContainer
             src={require("../../../assets/image/login_img.jpg")}
@@ -52,27 +71,34 @@ export default function Login({ navigation }: PropTypes): ReactElement {
 
           <View style={styles.inputFieldContainer}>
             <CustomTextInput
-              value={username}
-              onChangeText={setUsername}
-              placeholder="username"
+              value={email}
+              onChangeText={setEmail}
+              placeholder="email"
             />
 
             <CustomTextInput
               value={password}
               onChangeText={setPassword}
               placeholder="password"
+              secureTextEntry
             />
           </View>
 
           <View style={styles.loginBtnContainer}>
             <CustomButton
-              style={{
-                backgroundColor: Colors.LIGHT.accent,
-              }}
+              onPress={onLoginPress}
+              disabled={!canSubmit || submitting}
+              style={{ backgroundColor: Colors.LIGHT.accent }}
             >
-              Login
+              {submitting ? "Logging in…" : "Login"}
             </CustomButton>
+            {submitting ? <ActivityIndicator style={{ marginTop: 8 }} /> : null}
           </View>
+          {error ? (
+            <Text style={{ color: "red", textAlign: "center", marginTop: 8 }}>
+              {String(error)}
+            </Text>
+          ) : null}
 
           <View style={styles.bottomInfoText}>
             <Text
@@ -97,49 +123,3 @@ export default function Login({ navigation }: PropTypes): ReactElement {
     </TouchableWithoutFeedback>
   );
 }
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-  },
-  topContainer: {
-    flex: 1,
-  },
-
-  bottomContainer: {
-    flex: 2.5,
-    alignItems: "center",
-    padding: Size.responsive.width(2),
-    backgroundColor: Colors.LIGHT.cardBackgroud,
-    borderStartStartRadius: wp(4),
-    borderStartEndRadius: wp(4),
-
-    //shadows
-    elevation: 5,
-    shadowColor: "#000",
-    shadowOffset: { height: 0, width: 2 },
-    shadowOpacity: 1,
-    shadowRadius: 20,
-  },
-
-  dividerLine: {
-    height: hp(0.29),
-    width: wp(40),
-    backgroundColor: "black",
-    borderRadius: 10,
-  },
-
-  inputFieldContainer: {
-    width: wp(90),
-    marginVertical: hp(3),
-  },
-
-  loginBtnContainer: {
-    width: wp(90),
-  },
-
-  bottomInfoText: {
-    width: wp(50),
-    marginVertical: hp(2),
-  },
-});
