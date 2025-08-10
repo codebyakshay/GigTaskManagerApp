@@ -1,6 +1,3 @@
-// src/features/tasks/task.types.ts
-import type { Timestamp } from "firebase/firestore";
-
 export type Priority = "low" | "medium" | "high";
 
 export type Task = {
@@ -14,17 +11,9 @@ export type Task = {
   updatedAt?: Date;
 };
 
-export type CreateTaskInput = Omit<
-  Task,
-  "id" | "createdAt" | "updatedAt" | "completed"
->;
-
-export type TaskDoc = {
-  title: string;
-  description: string;
-  dueDate: Timestamp;
-  priority: Priority;
-  completed: boolean;
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
+// 👉 What we keep in Redux (no Date objects)
+export type TaskEntity = Omit<Task, "dueDate" | "createdAt" | "updatedAt"> & {
+  dueDate: string; // ISO
+  createdAt?: string; // ISO
+  updatedAt?: string; // ISO
 };

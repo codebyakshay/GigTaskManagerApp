@@ -20,7 +20,14 @@ const uidOrThrow = () => {
   return uid;
 };
 
-const mapDoc = (d: any): Task => {
+const toISO = (v: any) =>
+  v?.toDate?.()
+    ? v.toDate().toISOString()
+    : v
+    ? new Date(v).toISOString()
+    : undefined;
+
+const mapDoc = (d: any): any => {
   const x = d.data();
   return {
     id: d.id,
@@ -28,9 +35,10 @@ const mapDoc = (d: any): Task => {
     description: x.description,
     priority: x.priority,
     completed: x.completed,
-    dueDate: x.dueDate?.toDate?.() ?? new Date(x.dueDate),
-    createdAt: x.createdAt?.toDate?.(),
-    updatedAt: x.updatedAt?.toDate?.(),
+    // store as ISO strings (serializable)
+    dueDate: toISO(x.dueDate)!,
+    createdAt: toISO(x.createdAt),
+    updatedAt: toISO(x.updatedAt),
   };
 };
 

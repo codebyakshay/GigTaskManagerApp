@@ -8,7 +8,6 @@ import Task from "../../screen/TaskScreen/Task";
 export type BottomTabsParamList = {
   Dashboard: undefined;
   Task: undefined;
-  Profile: undefined;
 };
 
 const Tab = createBottomTabNavigator<BottomTabsParamList>();

@@ -6,7 +6,7 @@ import { initializeAuth } from "firebase/auth";
 const { getReactNativePersistence } = require("firebase/auth");
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { initializeFirestore, persistentLocalCache } from "firebase/firestore";
+import { initializeFirestore, memoryLocalCache } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyApPrdv3b3pdlnmoK5NY7n45RPt6BigOt8",
@@ -28,6 +28,6 @@ export const auth = initializeAuth(app, {
 
 // Firestore with offline cache (counts as “local storage”)
 export const db = initializeFirestore(app, {
-  localCache: persistentLocalCache(),
+  localCache: memoryLocalCache(),
   experimentalAutoDetectLongPolling: true, // helps on some RN networks
 });

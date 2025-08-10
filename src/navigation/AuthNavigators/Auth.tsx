@@ -1,13 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import React, { ReactElement } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import Dashboard from "../../screen/DashboardScreen/Dashboard";
 import BottomTabs from "../BottomTabs/BottomTabs";
+import AddTask from "../../screen/AddTaskScreen/AddTask";
 
-const Stack = createStackNavigator();
-interface PropTypes {}
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-export default function Auth({}: PropTypes): ReactElement {
+export type AuthStackParamList = {
+  BottomTabNavigators: undefined;
+  AddTask: undefined;
+};
+
+const Stack = createNativeStackNavigator<AuthStackParamList>();
+
+export default function Auth(): ReactElement {
   return (
     <Stack.Navigator initialRouteName="BottomTabNavigators">
       <Stack.Screen
@@ -15,6 +20,21 @@ export default function Auth({}: PropTypes): ReactElement {
         component={BottomTabs}
         options={{
           headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="AddTask"
+        component={AddTask}
+        options={{
+          headerShown: false,
+          // ✅ iOS sheet presenter, Android still shows fullscreen
+          presentation: Platform.OS === "ios" ? "formSheet" : "modal",
+
+          // ✅ numeric detents (your current types want numbers)
+          sheetAllowedDetents: [0.7, 1.0], // 70% and full
+          sheetGrabberVisible: true,
+          sheetCornerRadius: 24,
         }}
       />
     </Stack.Navigator>

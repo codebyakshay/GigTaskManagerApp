@@ -9,6 +9,7 @@ interface PropTypes {
   icon?: string;
   mode?: "text" | "outlined" | "contained" | "elevated" | "contained-tonal";
   disabled?: boolean;
+  isPrimary?: boolean;
 }
 
 export default function CustomButton({
@@ -24,7 +25,7 @@ export default function CustomButton({
       icon={icon}
       mode={mode}
       onPress={onPress}
-      style={style}
+      style={[style]}
       disabled={disabled}
     >
       {children}

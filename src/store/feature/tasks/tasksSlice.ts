@@ -1,10 +1,10 @@
 // src/store/feature/tasks/tasksSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { Task } from "../../../models/task";
+import type { TaskEntity } from "../../../models/task";
 import { addTaskExtraReducers } from "./taskExtraBuilder";
 
 export type TasksState = {
-  items: Task[];
+  items: TaskEntity[];
   loading: boolean;
   error?: string;
 };
@@ -15,7 +15,7 @@ const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    setItems(state, action: PayloadAction<Task[]>) {
+    setItems(state, action: PayloadAction<TaskEntity[]>) {
       state.items = action.payload;
     },
     setLoading(state, action: PayloadAction<boolean>) {

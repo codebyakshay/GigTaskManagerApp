@@ -1,5 +1,5 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import React, { ReactElement } from "react";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { ReactElement, useState } from "react";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -10,28 +10,34 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Colors } from "../constant/Colors";
 import Chip from "./Chip";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import IsCompletedChip from "./IsCompletedChip";
+import { formatDueDate } from "../utils/date";
+import EvilIcons from "@expo/vector-icons/EvilIcons";
+import Feather from "@expo/vector-icons/Feather";
 
 interface PropTypes {
+  id: string;
   title: string;
   priority?: Priority;
-  isCompleted?: boolean;
+
   dueDate?: Date | string;
+  description?: string;
+  isCompleted: boolean;
 }
 
 export default function TaskItems({
+  id,
   title,
   priority,
-  isCompleted,
   dueDate,
+  description,
+  isCompleted,
 }: PropTypes): ReactElement {
-  const dueDateText =
-    dueDate instanceof Date
-      ? dueDate.toLocaleDateString("en-IN", {
-          month: "short",
-          day: "numeric",
-          year: "numeric",
-        })
-      : dueDate ?? " ";
+  const [deleteOptionVisible, setDeleteOptionVisible] = useState(false);
+
+  function handleOption() {
+    setDeleteOptionVisible((prev) => !prev);
+  }
   return (
     <View style={styles.itemContainer}>
       <View
@@ -56,6 +62,7 @@ export default function TaskItems({
                   opacity: pressed ? 0.6 : 1,
                 },
               ]}
+              onPress={handleOption}
             >
               <MaterialCommunityIcons
                 name="dots-horizontal"
@@ -68,8 +75,8 @@ export default function TaskItems({
       </View>
 
       <View style={styles.middleContainer}>
-        <Chip isCompleted={true} />
-        <Chip isCompleted={false} priority="high" />
+        <Chip priority={priority} />
+        <IsCompletedChip isCompleted={isCompleted} />
       </View>
 
       <View style={styles.dateContainer}>
@@ -78,9 +85,34 @@ export default function TaskItems({
         </View>
 
         <View style={styles.dateTextContainer}>
-          <Text style={{ fontSize: wp(4) }}>{dueDateText}</Text>
+          <Text style={{ fontSize: wp(4) }}>{formatDueDate(dueDate)}</Text>
         </View>
       </View>
+
+      {deleteOptionVisible && (
+        <ScrollView style={styles.optionContainer}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.optionItemContainer,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}
+            onPress={() => {}}
+          >
+            <Feather name="trash-2" size={24} color="black" />
+            <Text>Delete</Text>
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [
+              styles.optionItemContainer,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}
+            onPress={() => {}}
+          >
+            <Feather name="edit" size={24} color="black" />
+            <Text>Edit</Text>
+          </Pressable>
+        </ScrollView>
+      )}
     </View>
   );
 }
@@ -137,5 +169,32 @@ const styles = StyleSheet.create({
   dateTextContainer: {
     justifyContent: "center",
     marginHorizontal: wp(1),
+  },
+
+  optionContainer: {
+    width: wp(30),
+    minHeight: hp(10),
+    backgroundColor: "rgba(156, 156, 156, 0.5)",
+    position: "absolute",
+    right: wp(8),
+    top: hp(5),
+    borderRadius: wp(3),
+    borderWidth: wp(0.3),
+    padding: wp(1),
+
+    //
+    elevation: 5,
+    shadowOffset: { height: 0, width: 0 },
+    shadowColor: "#000",
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
+  },
+
+  optionItemContainer: {
+    borderRadius: wp(1),
+    borderWidth: wp(0.3),
+    flexDirection: "row",
+    marginVertical: hp(0.2),
+    alignItems: "center",
   },
 });
