@@ -12,11 +12,14 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import TaskItems from "../../component/TaskItems";
+import TaskItems from "../../component/TaskItems/TaskItems";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { styles } from "./styles";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { fetchTasksOnce } from "../../store/feature/tasks/taskThunks";
+import {
+  deleteTask,
+  fetchTasksOnce,
+} from "../../store/feature/tasks/taskThunks";
 import CustomButton from "../../component/CustomButton";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import {
@@ -47,6 +50,16 @@ export default function Task({}: PropTypes): ReactElement {
   }, [dispatch]);
 
   // console.log(`isLoading ${loading}, items ${items}, erros ${error}`);
+
+  const handleDelete = async (id: string) => {
+    try {
+      await (dispatch(deleteTask(id)) as any).unwrap();
+      // optional refresh if your slice doesn't optimistically remove
+      await dispatch(fetchTasksOnce() as any);
+    } catch (e) {
+      console.warn("Delete failed:", e);
+    }
+  };
 
   return (
     <>
@@ -92,6 +105,7 @@ export default function Task({}: PropTypes): ReactElement {
                   description={item.description}
                   dueDate={new Date(item.dueDate)}
                   isCompleted={item.completed}
+                  onDelete={handleDelete}
                 />
               )}
               style={{}}

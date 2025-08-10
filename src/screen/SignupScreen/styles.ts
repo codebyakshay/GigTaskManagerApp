@@ -1,9 +1,10 @@
-import { StyleSheet } from "react-native";
-import { Size } from "../../constant/Size";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+
+import { StyleSheet } from "react-native";
+import { Size } from "../../constant/Size";
 import { Colors } from "../../constant/Colors";
 
 export const styles = StyleSheet.create({
@@ -61,7 +62,7 @@ export const styles = StyleSheet.create({
   },
 
   bottomInfoText: {
-    width: wp(50),
+    width: wp(60),
     marginVertical: hp(2),
   },
 });

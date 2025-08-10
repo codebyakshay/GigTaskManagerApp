@@ -14,9 +14,10 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: hp(4),
     alignItems: "center",
+    justifyContent: "space-evenly",
   },
   topTextContainer: {
-    width: wp(70),
+    width: wp(60),
     alignItems: "flex-start",
     justifyContent: "center",
   },
@@ -24,14 +25,16 @@ export const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "center",
     width: wp(10),
+    marginHorizontal: wp(1),
   },
 
   bottomContainer: {
     marginTop: Size.spacing.md,
     flexDirection: "row",
     flexWrap: "wrap",
+    justifyContent: "center",
   },
   tileContainer: {
-    margin: wp(1.8),
+    margin: wp(1.5),
   },
 });

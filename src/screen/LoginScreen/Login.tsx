@@ -69,6 +69,10 @@ export default function Login({ navigation }: PropTypes): ReactElement {
         <View style={styles.bottomContainer}>
           <View style={styles.dividerLine} />
 
+          <View style={styles.legendContainer}>
+            <Text style={styles.legendText}>Login</Text>
+          </View>
+
           <View style={styles.inputFieldContainer}>
             <CustomTextInput
               value={email}

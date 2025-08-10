@@ -10,16 +10,13 @@ import {
 import React, { ReactElement, useState } from "react";
 import { Colors } from "../../constant/Colors";
 import ImageContainer from "../../component/ImageContainer";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 
 import { Size } from "../../constant/Size";
 import CustomTextInput from "../../component/CutomTextInput";
 import CustomButton from "../../component/CustomButton";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { signUp } from "../../store/feature/auth/authThunks";
+import { styles } from "./styles";
 
 interface PropTypes {
   navigation: any;
@@ -70,6 +67,10 @@ export default function Signup({ navigation }: PropTypes): ReactElement {
         {/* ??? BOTTOM CONTAINER ??? */}
         <View style={styles.bottomContainer}>
           <View style={styles.dividerLine} />
+
+          <View style={styles.legendContainer}>
+            <Text style={styles.legendText}>Signup</Text>
+          </View>
 
           <View style={styles.inputFieldContainer}>
             <CustomTextInput
@@ -132,49 +133,3 @@ export default function Signup({ navigation }: PropTypes): ReactElement {
     </TouchableWithoutFeedback>
   );
 }
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-  },
-  topContainer: {
-    flex: 1,
-  },
-
-  bottomContainer: {
-    flex: 2.5,
-    alignItems: "center",
-    padding: Size.responsive.width(2),
-    backgroundColor: Colors.LIGHT.cardBackgroud,
-    borderStartStartRadius: wp(4),
-    borderStartEndRadius: wp(4),
-
-    //shadows
-    elevation: 5,
-    shadowColor: "#000",
-    shadowOffset: { height: 0, width: 2 },
-    shadowOpacity: 1,
-    shadowRadius: 20,
-  },
-
-  dividerLine: {
-    height: hp(0.29),
-    width: wp(40),
-    backgroundColor: "black",
-    borderRadius: 10,
-  },
-
-  inputFieldContainer: {
-    width: wp(90),
-    marginVertical: hp(3),
-  },
-
-  loginBtnContainer: {
-    width: wp(90),
-  },
-
-  bottomInfoText: {
-    width: wp(60),
-    marginVertical: hp(2),
-  },
-});
