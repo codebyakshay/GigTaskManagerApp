@@ -6,7 +6,7 @@
     "start": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "pods": "cd ios && RCT_NEW_ARCH_ENABLED=1 pod install && cd ..",
+    "pods": "cd ios && RCT_NEW_ARCH_ENABLED=0 pod install && cd ..",
     "clean_android": "cd android && ./gradlew && cd ..",
     "build_android_release": "cd android && ./gradlew assemblerelease && cd ..",
     "prebuild": "npx expo prebuild --clean",

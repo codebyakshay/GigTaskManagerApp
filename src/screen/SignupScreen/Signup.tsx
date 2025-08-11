@@ -60,7 +60,7 @@ export default function Signup({ navigation }: PropTypes): ReactElement {
         {/* ??? TOP CONTAINER ??? */}
         <View style={styles.topContainer}>
           <ImageContainer
-            src={require("../../../assets/image/login_img.jpg")}
+            src={require("../../../assets/image/signup_img.jpg")}
           />
         </View>
 
@@ -69,7 +69,7 @@ export default function Signup({ navigation }: PropTypes): ReactElement {
           <View style={styles.dividerLine} />
 
           <View style={styles.legendContainer}>
-            <Text style={styles.legendText}>Signup</Text>
+            <Text style={styles.legendText}>Sign up</Text>
           </View>
 
           <View style={styles.inputFieldContainer}>

@@ -87,6 +87,7 @@ export default function TaskItems({
                     borderRadius: 99,
                     padding: 2,
                     opacity: pressed ? 0.6 : 1,
+                    borderWidth: wp(0.4),
                   },
                 ]}
                 onPress={() => {
@@ -97,7 +98,7 @@ export default function TaskItems({
                 <MaterialCommunityIcons
                   name="dots-horizontal"
                   size={24}
-                  color="black"
+                  color="balck"
                 />
               </Pressable>
             </View>

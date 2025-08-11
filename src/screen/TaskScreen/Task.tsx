@@ -6,7 +6,7 @@ import {
   ActivityIndicator,
   Pressable,
 } from "react-native";
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { Colors } from "../../constant/Colors";
 import {
   widthPercentageToDP as wp,
@@ -20,7 +20,6 @@ import {
   deleteTask,
   fetchTasksOnce,
 } from "../../store/feature/tasks/taskThunks";
-import CustomButton from "../../component/CustomButton";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import {
   CompositeNavigationProp,
@@ -30,6 +29,8 @@ import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { BottomTabsParamList } from "../../navigation/BottomTabs/BottomTabs";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../../navigation/AuthNavigators/Auth";
+import { Priority, TaskEntity } from "../../models/task";
+import RnPaperChip from "../../component/RnPaperChip";
 
 interface PropTypes {}
 
@@ -38,18 +39,48 @@ type Nav = CompositeNavigationProp<
   NativeStackNavigationProp<AuthStackParamList>
 >;
 
+type Status = "completed" | "incomplete";
+
 export default function Task({}: PropTypes): ReactElement {
   const colorScheme = useColorScheme();
   const navigation = useNavigation<Nav>();
-
   const dispatch = useAppDispatch();
   const { items, loading, error } = useAppSelector((s) => s.tasks);
 
-  useEffect(() => {
-    dispatch(fetchTasksOnce() as any);
-  }, [dispatch]);
+  const [selectedStatus, setSelectedStatus] = useState<Set<Status>>(new Set());
+  const [selectedPriorities, setSelectedPriorities] = useState<Set<Priority>>(
+    new Set()
+  );
 
-  // console.log(`isLoading ${loading}, items ${items}, erros ${error}`);
+  const toggleStatus = (v: Status) =>
+    setSelectedStatus((prev) => {
+      const next = new Set(prev);
+      next.has(v) ? next.delete(v) : next.add(v);
+      return next;
+    });
+
+  const togglePriority = (p: Priority) =>
+    setSelectedPriorities((prev) => {
+      const next = new Set(prev);
+      next.has(p) ? next.delete(p) : next.add(p);
+      return next;
+    });
+
+  const matches = (t: TaskEntity) => {
+    const statusOK =
+      selectedStatus.size === 0 ||
+      (selectedStatus.has("completed") && t.completed) ||
+      (selectedStatus.has("incomplete") && !t.completed);
+
+    const priorityOK =
+      selectedPriorities.size === 0 || selectedPriorities.has(t.priority);
+
+    return statusOK && priorityOK;
+  };
+
+  const filtered = items
+    .filter(matches)
+    .sort((a, b) => a.dueDate.localeCompare(b.dueDate));
 
   const handleDelete = async (id: string) => {
     try {
@@ -60,6 +91,10 @@ export default function Task({}: PropTypes): ReactElement {
       console.warn("Delete failed:", e);
     }
   };
+
+  useEffect(() => {
+    dispatch(fetchTasksOnce() as any);
+  }, [dispatch]);
 
   return (
     <>
@@ -83,6 +118,46 @@ export default function Task({}: PropTypes): ReactElement {
           </View>
         </View>
 
+        <View style={styles.topFilterStackContainer}>
+          <View style={styles.filterItemContainer}>
+            <RnPaperChip
+              selected={selectedStatus.has("completed")}
+              onPress={() => toggleStatus("completed")}
+            >
+              Complete
+            </RnPaperChip>
+
+            <RnPaperChip
+              selected={selectedStatus.has("incomplete")}
+              onPress={() => toggleStatus("incomplete")}
+            >
+              Incomplete
+            </RnPaperChip>
+          </View>
+          <View style={styles.filterItemContainer}>
+            <RnPaperChip
+              selected={selectedPriorities.has("low")}
+              onPress={() => togglePriority("low")}
+            >
+              Low
+            </RnPaperChip>
+
+            <RnPaperChip
+              selected={selectedPriorities.has("medium")}
+              onPress={() => togglePriority("medium")}
+            >
+              Medium
+            </RnPaperChip>
+
+            <RnPaperChip
+              selected={selectedPriorities.has("high")}
+              onPress={() => togglePriority("high")}
+            >
+              High
+            </RnPaperChip>
+          </View>
+        </View>
+
         <View style={styles.bottomContainer}>
           {loading ? <ActivityIndicator style={{ marginTop: 12 }} /> : null}
           {error ? (
@@ -95,7 +170,7 @@ export default function Task({}: PropTypes): ReactElement {
 
           <View style={{ height: hp(75) }}>
             <FlatList
-              data={items}
+              data={filtered}
               keyExtractor={(item) => String(item.id)}
               renderItem={({ item }) => (
                 <TaskItems

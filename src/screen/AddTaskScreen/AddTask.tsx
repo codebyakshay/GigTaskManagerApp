@@ -9,14 +9,12 @@ import {
 import React, { ReactElement, useState } from "react";
 import { Colors } from "../../constant/Colors";
 
-import { Size } from "../../constant/Size";
 import CustomTextInput from "../../component/CutomTextInput";
 import type { Priority } from "../../models/task";
 import Chip from "../../component/Chip";
 import { Checkbox, RadioButton, Switch } from "react-native-paper";
 import { styles } from "./styles";
 import CustomButton from "../../component/CustomButton";
-import { AuthStackParamList } from "../../navigation/AuthNavigators/Auth";
 import { useNavigation } from "@react-navigation/native";
 
 import DatePicker from "react-native-date-picker";

@@ -12,6 +12,17 @@ export const styles = StyleSheet.create({
     padding: wp(Size.spacing.xs),
   },
 
+  topFilterStackContainer: {
+    flexDirection: "column",
+    marginVertical: wp(2),
+  },
+
+  filterItemContainer: {
+    flexDirection: "row",
+    marginVertical: wp(2),
+    columnGap: wp(2),
+  },
+
   topContainer: {
     flexDirection: "row",
     marginTop: hp(4),
@@ -29,7 +40,7 @@ export const styles = StyleSheet.create({
   },
 
   bottomContainer: {
-    marginTop: Size.spacing.md,
+    // marginTop: Size.spacing.md,
   },
 
   addBtnContainer: {
