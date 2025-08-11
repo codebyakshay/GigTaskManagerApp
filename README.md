@@ -7,6 +7,27 @@ A simple task manager for gig workers built for the WhatBytes assignment. It inc
 
 ---
 
+## Gif Demo
+
+<p align="center">
+  <img src="./assets/app_demo/app_demo.gif" alt="App Demo" width="240" />
+</p>
+
+---
+
+## Screenshots
+
+<p align="center">
+  <img src="./assets/app_demo/login.png" alt="Login" width="240" />
+  <img src="./assets/app_demo/signup.png" alt="Signup" width="240" />
+</p>
+<p align="center">
+  <img src="./assets/app_demo/dashboard.png" alt="Dashboard" width="240" />
+  <img src="./assets/app_demo/tasklist.png" alt="Task List" width="240" />
+</p>
+
+---
+
 ## Features
 
 - **Auth**: Firebase email/password (sign up, sign in, logout) with error display.
@@ -141,19 +162,6 @@ npx expo start
 - **Add Task**: Open the plus/add button → modal sheet → fill title, description, date, priority → Confirm.
 - **Delete**: Use the `…` menu on a task → Delete (confirm).
 - **Toggle Complete**: Quick toggle available on each task row.
-
----
-
-## Screenshots
-
-<p align="center">
-  <img src="./assets/app_demo/login.png" alt="Login" width="240" />
-  <img src="./assets/app_demo/signup.png" alt="Signup" width="240" />
-</p>
-<p align="center">
-  <img src="./assets/app_demo/dashboard.png" alt="Dashboard" width="240" />
-  <img src="./assets/app_demo/tasklist.png" alt="Task List" width="240" />
-</p>
 
 ---
 
