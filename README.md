@@ -15,6 +15,14 @@ A simple task manager for gig workers built for the WhatBytes assignment. It inc
 
 ---
 
+## Video Demo & APK
+
+📹 Video Demo: [https://drive.google.com/file/d/1a2b3c4d5e6f7g8h9i0j/view?usp=sharing](https://drive.google.com/file/d/1a2b3c4d5e6f7g8h9i0j/view?usp=sharing)
+
+📦 APK Download: [https://drive.google.com/file/d/0j9i8h7g6f5e4d3c2b1a/view?usp=sharing](https://drive.google.com/file/d/0j9i8h7g6f5e4d3c2b1a/view?usp=sharing)
+
+---
+
 ## Screenshots
 
 <p align="center">
