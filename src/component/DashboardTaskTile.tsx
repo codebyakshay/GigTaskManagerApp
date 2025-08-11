@@ -3,6 +3,7 @@ import React from "react";
 import {
   Image,
   ImageBackground,
+  ImageSourcePropType,
   Platform,
   Pressable,
   StyleSheet,
@@ -22,6 +23,7 @@ interface Props {
   label?: string;
   tint?: string;
   onMenuPress?: () => void;
+  source?: ImageSourcePropType;
 }
 
 export default function DashboardTaskTile({
@@ -29,15 +31,12 @@ export default function DashboardTaskTile({
   label = "In Progress",
   tint = Colors.LIGHT.purple,
   onMenuPress,
+  source = require("../../assets/image/abstract1.jpg"),
 }: Props) {
   return (
     <View style={[styles.card, { backgroundColor: tint }]}>
       {/* Decorative wave image clipped by borderRadius */}
-      <Image
-        source={require("../../assets/image/abstract1.jpg")}
-        style={styles.wave}
-        resizeMode="cover"
-      />
+      <Image source={source} style={styles.wave} resizeMode="cover" />
 
       <View style={styles.headerRow}>
         <View>

@@ -12,7 +12,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import TaskItems from "../../component/TaskItems/TaskItems";
+
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { styles } from "./styles";
 import { useAppDispatch, useAppSelector } from "../../store/store";
@@ -31,6 +31,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../../navigation/AuthNavigators/Auth";
 import { Priority, TaskEntity } from "../../models/task";
 import RnPaperChip from "../../component/RnPaperChip";
+import TaskItems from "../../component/TaskItems/TaskItems";
 
 interface PropTypes {}
 
@@ -168,10 +169,11 @@ export default function Task({}: PropTypes): ReactElement {
             </Text>
           ) : null}
 
-          <View style={{ height: hp(75) }}>
+          <View style={{ height: hp(65) }}>
             <FlatList
               data={filtered}
               keyExtractor={(item) => String(item.id)}
+              style={{ height: hp(65) }}
               renderItem={({ item }) => (
                 <TaskItems
                   id={item.id}
@@ -183,7 +185,6 @@ export default function Task({}: PropTypes): ReactElement {
                   onDelete={handleDelete}
                 />
               )}
-              style={{}}
             />
           </View>
         </View>

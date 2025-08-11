@@ -62,7 +62,7 @@ export const styles = StyleSheet.create({
   },
 
   bottomInfoText: {
-    width: wp(55),
+    width: wp(45),
     marginVertical: hp(2),
   },
 });

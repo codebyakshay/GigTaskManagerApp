@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "GigTaskManagerApp.app"
-               BlueprintName = "GigTaskManagerApp"
-               ReferencedContainer = "container:GigTaskManagerApp.xcodeproj">
+               BuildableName = "GigTaskManager.app"
+               BlueprintName = "GigTaskManager"
+               ReferencedContainer = "container:GigTaskManager.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "GigTaskManagerAppTests.xctest"
-               BlueprintName = "GigTaskManagerAppTests"
-               ReferencedContainer = "container:GigTaskManagerApp.xcodeproj">
+               BuildableName = "GigTaskManagerTests.xctest"
+               BlueprintName = "GigTaskManagerTests"
+               ReferencedContainer = "container:GigTaskManager.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "GigTaskManagerApp.app"
-            BlueprintName = "GigTaskManagerApp"
-            ReferencedContainer = "container:GigTaskManagerApp.xcodeproj">
+            BuildableName = "GigTaskManager.app"
+            BlueprintName = "GigTaskManager"
+            ReferencedContainer = "container:GigTaskManager.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "GigTaskManagerApp.app"
-            BlueprintName = "GigTaskManagerApp"
-            ReferencedContainer = "container:GigTaskManagerApp.xcodeproj">
+            BuildableName = "GigTaskManager.app"
+            BlueprintName = "GigTaskManager"
+            ReferencedContainer = "container:GigTaskManager.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

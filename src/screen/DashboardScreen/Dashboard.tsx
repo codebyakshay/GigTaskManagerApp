@@ -82,11 +82,19 @@ export default function Dashboard({}: PropTypes): ReactElement {
 
       <View style={styles.bottomContainer}>
         <View style={styles.tileContainer}>
-          <DashboardTaskTile count={completedCount} label="Completed" />
+          <DashboardTaskTile
+            count={completedCount}
+            label="Completed"
+            source={require("../../../assets/image/abstract1.jpg")}
+          />
         </View>
 
         <View style={styles.tileContainer}>
-          <DashboardTaskTile count={incompleteCount} label="Incomplete" />
+          <DashboardTaskTile
+            count={incompleteCount}
+            label="Incomplete"
+            source={require("../../../assets/image/abstract2.jpg")}
+          />
         </View>
       </View>
     </View>

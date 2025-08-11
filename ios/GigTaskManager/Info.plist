@@ -7,7 +7,7 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>$(DEVELOPMENT_LANGUAGE)</string>
     <key>CFBundleDisplayName</key>
-    <string>GigTaskManagerApp</string>
+    <string>Gig Task Manager</string>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
@@ -27,7 +27,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.razer-ak.GigTaskManagerApp</string>
+          <string>com.codebyakshay.gig.taskmanager.app</string>
         </array>
       </dict>
     </array>

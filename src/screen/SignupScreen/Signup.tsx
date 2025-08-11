@@ -112,7 +112,7 @@ export default function Signup({ navigation }: PropTypes): ReactElement {
 
           <View style={styles.bottomInfoText}>
             <Text
-              style={{ textAlign: "center", fontSize: 16, fontWeight: "300" }}
+              style={{ textAlign: "center", fontSize: 14, fontWeight: "300" }}
             >
               Already have an account?
               <Text

@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "GigTaskManagerApp",
-    "slug": "GigTaskManagerApp",
+    "name": "Gig Task Manager",
+    "slug": "Gig Task Manager",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/app-icon.png",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash-icon.png",
@@ -13,16 +13,16 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.razer-ak.GigTaskManagerApp",
+      "bundleIdentifier": "com.codebyakshay.gig.taskmanager.app",
       "newArchEnabled": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/app-icon-nobg.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.razer_ak.GigTaskManagerApp"
+      "package": "com.codebyakshay.gig.taskmanager.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"

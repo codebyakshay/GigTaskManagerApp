@@ -85,9 +85,9 @@ export default function TaskItems({
                   {
                     backgroundColor: "white",
                     borderRadius: 99,
-                    padding: 2,
+
                     opacity: pressed ? 0.6 : 1,
-                    borderWidth: wp(0.4),
+                    borderWidth: wp(0.2),
                   },
                 ]}
                 onPress={() => {
@@ -103,6 +103,10 @@ export default function TaskItems({
               </Pressable>
             </View>
           </View>
+        </View>
+
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.descriptionText}>{description}</Text>
         </View>
 
         <View style={styles.middleContainer}>

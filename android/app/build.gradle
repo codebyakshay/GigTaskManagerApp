@@ -87,9 +87,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.razer_ak.GigTaskManagerApp'
+    namespace 'com.codebyakshay.gig.taskmanager.app'
     defaultConfig {
-        applicationId 'com.razer_ak.GigTaskManagerApp'
+        applicationId 'com.codebyakshay.gig.taskmanager.app'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -4,6 +4,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { Size } from "../../constant/Size";
+import { Colors } from "../../constant/Colors";
 
 export const styles = StyleSheet.create({
   itemContainer: {
@@ -43,8 +44,21 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
+  descriptionContainer: {
+    marginVertical: hp(1),
+    minHeight: hp(3),
+    padding: wp(2),
+    maxWidth: wp(70),
+  },
+
+  descriptionText: {
+    fontSize: wp(5),
+    fontWeight: "400",
+    color: Colors.LIGHT.textSecondary,
+  },
+
   middleContainer: {
-    marginTop: hp(2),
+    marginTop: hp(0.5),
     flexDirection: "row",
   },
 

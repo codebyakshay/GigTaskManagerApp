@@ -1,4 +1,4 @@
-package com.razer_ak.GigTaskManagerApp
+package com.codebyakshay.gig.taskmanager.app
 
 import android.os.Build
 import android.os.Bundle
